@@ -7,6 +7,7 @@ import iziToast from 'izitoast';
 
 import 'izitoast/dist/css/iziToast.min.css';
 
+
 let lightbox;
 
 export function renderGallery(images) {
@@ -56,4 +57,8 @@ export function showLoading() {
 
 export function hideLoading() {
     document.querySelector('.loading').style.display = 'none';
+}
+
+export function clearGallery() {
+    gallery.innerHTML = '';
 }

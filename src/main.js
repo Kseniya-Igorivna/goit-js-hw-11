@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const query = input.value.trim();
     if (query === '') {
-    showError('Please enter a search query');
+        showError('Please enter a search query');
+        input.value = '';
     return;
     }
 
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hideLoading();
     if (data.hits.length === 0) {
         showError('Sorry, there are no images matching your search query. Please try again!');
+        input.value = '';
     } else {
         renderGallery(data.hits);
     }
