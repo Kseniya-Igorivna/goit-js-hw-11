@@ -1,7 +1,7 @@
 
 import { fetchImages } from './js/pixabay-api.js';
 
-import { renderGallery, showError, showLoading, hideLoading } from './js/render-functions.js';
+import { renderGallery, showError, showLoading, hideLoading, clearGallery } from './js/render-functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('search-form');
@@ -11,24 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
 
     const query = input.value.trim();
-    if (query === '') {
+        if (query === '') {
+        clearGallery();
         showError('Please enter a search query');
         input.value = '';
-    return;
+        return;
     }
 
     try {
     showLoading();
     const data = await fetchImages(query);
     hideLoading();
-    if (data.hits.length === 0) {
+        if (data.hits.length === 0) {
+        clearGallery();
         showError('Sorry, there are no images matching your search query. Please try again!');
         input.value = '';
     } else {
+        clearGallery();
         renderGallery(data.hits);
     }
     } catch (error) {
-    hideLoading();
+        hideLoading();
+        clearGallery();
     showError('Failed to fetch images. Please try again later.');
     }
     });
