@@ -29,11 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         clearGallery();
         renderGallery(data.hits);
+        input.value = '';
     }
     } catch (error) {
         hideLoading();
         clearGallery();
     showError('Failed to fetch images. Please try again later.');
+    input.value = '';
     }
     });
 });
